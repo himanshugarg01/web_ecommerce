@@ -3,9 +3,11 @@ var divListProducts = document.getElementById("divListProducts");
 var aAddProduct = document.getElementById("aAddProduct");
 var productId=0;
 var products=[];
-
+  retrieveData();
 aAddProduct.addEventListener("click",function(event)
 {
+
+
   createAddProductPannel();
 
 });
@@ -106,8 +108,8 @@ function addProducttoArray()
     objProduct.Desc = document.getElementById("prodDesc").value;
 	objProduct.Price = document.getElementById("prodPrice").value;
 	objProduct.Quantity = document.getElementById("prodQuantity").value;
-
     products.push(objProduct);
+storingValue();
     deleteList();
     unHideAddNewProductLink();
 	makeTheList(objProduct);
@@ -120,7 +122,7 @@ function makeTheList(objProduct)
 {
   var listdiv=document.createElement("div");
   listdiv.setAttribute("id",objProduct.Id);
-  divListProducts.appendChild(listdiv);
+
 
   var listprodname=document.createElement("a");
   listprodname.setAttribute("href","#");
@@ -162,6 +164,7 @@ listprodprice.setAttribute("id","prodprice"+objProduct.Id);
     editbtn.setAttribute("id","editbtn"+objProduct.Id);
   editbtn.innerHTML="edit";
   listdiv.appendChild(editbtn);
+  divListProducts.appendChild(listdiv);
 
   document.getElementById("proddesc"+objProduct.Id).setAttribute("style","visibility:hidden");
   document.getElementById("prodprice"+objProduct.Id).setAttribute("style","visibility:hidden");
@@ -176,7 +179,7 @@ listprodprice.setAttribute("id","prodprice"+objProduct.Id);
   document.getElementById("prodqty"+objProduct.Id).setAttribute("style","visibility:visible");
   document.getElementById("delbtn"+objProduct.Id).setAttribute("style","visibility:visible");
   document.getElementById("editbtn"+objProduct.Id).setAttribute("style","visibility:visible");
-
+});
 document.getElementById("delbtn"+objProduct.Id).addEventListener("click",function(event)
 {
   var target=event.target.parentNode;
@@ -189,7 +192,7 @@ document.getElementById("delbtn"+objProduct.Id).addEventListener("click",functio
 {
  editPannel(objProduct);
 });
-});
+
 
   listprodname.addEventListener("click",function()
 {
@@ -203,6 +206,9 @@ document.getElementById("delbtn"+objProduct.Id).addEventListener("click",functio
 
   function editPannel(objProduct)
   {
+    //document.getElementById("delbtn"+objProduct.Id).setAttribute("style","visibility:hidden");
+    //document.getElementById("editbtn"+objProduct.Id).setAttribute("style","visibility:hidden");
+    //divListProducts.setAttribute("style","visibility:hidden");
     hideAddNewProductLink();
     var label =document.createElement("label");
     label.innerHTML = "Add New Product";
@@ -283,7 +289,7 @@ document.getElementById("delbtn"+objProduct.Id).addEventListener("click",functio
         unHideAddNewProductLink();
       });
 
-
+    unhideDelEdit();
   }
 
 function unHideAddNewProductLink()
@@ -298,5 +304,38 @@ function deleteList()
 
 function deleteNodeFromArray(a)
 {
-  products.splice(a,1);
+  var i=0;
+  while(i<products.length)
+  {
+    if(products[i].Id==a)
+    products.splice(i,1);
+    i++;
+  }
+  storingValue();
+}
+
+
+function storingValue()
+{
+  var product=JSON.stringify(products);
+  localStorage.setItem("data",product);
+
+}
+
+function retrieveData()
+{
+  var pro=localStorage.getItem("data");
+
+   if(pro)
+   {
+     products=JSON.parse(pro);
+   var n=products.length;
+   productId=n;
+   var i=0;
+   while(i<n)
+   {
+     makeTheList(products[i]);
+     i++;
+   }
+ }
 }
