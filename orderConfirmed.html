@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+<style media="screen">
+button
+{
+  background-color: orange;
+height: 35px;
+width: 160px;
+}
+</style>
 <body>
   <h1>ORDER CONFIRMED</h1>
   <h3>Thanks for shopping...............</h3>
+  <br>
+  <br>
+  <button id="continueBtn" type="button" name="button">Continue Shopping</button>
 </body>
+<script >
+  //var continue=document.getElementById("continueBtn");
+  document.getElementById("continueBtn").addEventListener("click",function(event)
+{
+  window.location.href='file:///C:/Users/Dell/Desktop/web/web_ecommerce/showProducts.html'
+});
+</script>
 </html>

@@ -2,7 +2,10 @@ var cartList=document.getElementById("cartList");
 var divCart=document.getElementById("divCart");
 var products=[];
 var productId=0;
+var t=0;
+var totalHead=document.getElementById("total");
 retrieveData();
+
 function retrieveData()
 {
   var pro=localStorage.getItem("cartQuantity");
@@ -15,6 +18,7 @@ function retrieveData()
    var i=0;
    while(i<n)
    {
+     if(products[i])
      makeCartList(products[i]);
      i++;
    }
@@ -25,6 +29,7 @@ function retrieveData()
 function makeCartList(objProduct)
 {
   var totalAmount=parseInt(objProduct.Price)*parseInt(objProduct.Qty);
+  t=t+totalAmount;
   var cartItem=document.createElement("li");
   cartItem.setAttribute("id",objProduct.Id);
 
@@ -38,6 +43,8 @@ function makeCartList(objProduct)
   cartItem.appendChild(rmCartBtn);
   insertBlankLine(cartItem);
   insertBlankLine(cartItem);
+
+  totalHead.innerHTML="Total amount to be paid : "+" "+t;
 
   rmCartBtn.addEventListener("click",function(event)
 {
@@ -62,11 +69,16 @@ function deleteFromCart(target)
 
 function removeCartItemFromArray(target)
 {
+//  var n=products.length;
   for(var i=0;i<products.length;i++)
   {
+    if(products[i])
+    {
     if(parseInt(products[i].Id)==target)
     {
     products.splice(i,1);
+    break;
+    }
     }
   }
   storingCartValue();
@@ -88,10 +100,13 @@ retrieveProdData();
 var j=0;
 for(var i=0;i<tempProd.length&&j<products.length;i++)
 {
+  if(products[j]!==null)
+  {
   if(products[j].Name==tempProd[i].Name)
   {
   tempProd[i].Quantity=tempProd[i].Quantity-products[j].Qty;
   j++;
+  }
   }
 }
 storingProdValue();

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style media="screen">
+.set
+{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  /* text-decoration: blink; */
+  background-color: grey;
+  height: 150px;
+  width: 500px;
+}
+.div
+{
+
+}
+button
+{
+  background-color: orange;
+  height: 50px;
+  width: 260px;
+}
+h3
+{
+  color:orange;
+}
+</style>
+<body>
+  <center>
+<div class="">
+  <h1 style="color:orange;" >Welcome</h1>
+  <div class="set">
+    <br>
+    <h3>If already has account</h3>
+  <button id="loginbtn" type="button" name="button">LOGIN</button>
+  </div>
+  <div class="set">
+    <br>
+    <h3>New user ?</h3>
+    <button id="registerbtn" type="button" name="button">Register</button>
+  </div>
+  </center>
+</body>
+<script>
+  var login=document.getElementById("loginbtn");
+  var reg=document.getElementById("registerbtn");
+  login.addEventListener("click",function(event)
+  {
+    window.location.href='file:///C:/Users/Dell/Desktop/web/web_ecommerce/loginPage.html'
+  });
+  reg.addEventListener("click",function(event)
+  {
+    window.location.href='file:///C:/Users/Dell/Desktop/web/web_ecommerce/registerPage.html'
+  });
+</script>
+</html>
