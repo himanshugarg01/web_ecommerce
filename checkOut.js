@@ -48,6 +48,8 @@ function makeCartList(objProduct)
 
   rmCartBtn.addEventListener("click",function(event)
 {
+  t=t-products[event.target.parentNode.id].Price;
+    totalHead.innerHTML="Total amount to be paid : "+" "+t;
   deleteFromCart(event.target.parentNode);
   target =event.target.parentNode.id;
   removeCartItemFromArray(target);

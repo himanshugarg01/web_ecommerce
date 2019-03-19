@@ -42,7 +42,7 @@ function makeProductList(objProduct)
   addBtnToCart.setAttribute("id","cartBtn"+objProduct.Id);
   addBtnToCart.innerHTML="Add To Cart";
 
-  listItem.innerHTML="Prod Name : "+objProduct.Name+"<br/>Description : "+objProduct.Desc+"<br/> Quantity : "+objProduct.Quantity+"      ";
+  listItem.innerHTML="Prod Name : "+objProduct.Name+"<br/>Description : "+objProduct.Desc+"<br/>Price : Rs. "+objProduct.Price+"<br/> Quantity : "+objProduct.Quantity+"      ";
   insertBlankLine(listItem);
   listItem.appendChild(input);
   listItem.appendChild(addBtnToCart);
@@ -56,6 +56,25 @@ function makeProductList(objProduct)
   });
 
 
+}
+
+function getCartQuantity(obj)
+{
+  var n=cartQuantity.length;
+  var i=0;
+  while(i<n)
+  {
+    if(obj.Id==cartQuantity[i].Id)
+    {
+      cartQuantity[i].Qty=obj.Qty;
+      break;
+    }
+    i++;
+  }
+  if(i==n)
+  {
+    cartQuantity.push(obj);
+  }
 }
 
 
@@ -89,11 +108,14 @@ function addToCart(objProduct)
   obj.Id=objProduct.Id;
   console.log(qty);
   console.log(objProduct.Quantity);
-  cartQuantity[objProduct.Id]=obj;
+  getCartQuantity(obj);
+  //cartQuantity[objProduct.Id]=obj;
   //document.getElementById("input"+objProduct.Id).value="";
   storingCartValue();
   }
 }
+
+
 
 function storingCartValue()
 {

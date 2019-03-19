@@ -308,7 +308,11 @@ function deleteNodeFromArray(a)
   while(i<products.length)
   {
     if(products[i].Id==a)
+    {
     products.splice(i,1);
+    break;
+
+    }
     i++;
   }
   storingValue();
@@ -325,17 +329,19 @@ function storingValue()
 function retrieveData()
 {
   var pro=localStorage.getItem("data");
-
-   if(pro)
-   {
-     products=JSON.parse(pro);
+ products=JSON.parse(pro);
    var n=products.length;
-   productId=n;
+   if(pro&&n>0)
+   {
+
+
+  // productId=n;
    var i=0;
    while(i<n)
    {
      makeTheList(products[i]);
      i++;
    }
+   productId=products[n-1].Id+1;
  }
 }
